@@ -7,9 +7,6 @@
     <meta name="theme-color" content="">
     <link rel="canonical" href="{{ canonical_url }}">
 
-   {{ 'flickity.css' | asset_url | stylesheet_tag }}
-{{ 'flickity.js' | asset_url | script_tag }}
-
     {%- if settings.favicon != blank -%}
       <link rel="icon" type="image/png" href="{{ settings.favicon | image_url: width: 32, height: 32 }}">
     {%- endif -%}
@@ -17,6 +14,11 @@
     {%- unless settings.type_header_font.system? and settings.type_body_font.system? -%}
       <link rel="preconnect" href="https://fonts.shopifycdn.com" crossorigin>
     {%- endunless -%}
+    <!-- Swiper.js CSS -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css" />
+
+<!-- Swiper.js JavaScript -->
+<script src="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.js"></script>
 
     <title>
       {{ page_title }}
@@ -287,9 +289,7 @@
       }
 
     </script>
-    
-  <script src="https://cdn.jsdelivr.net
-    </script>
+
   </head>
 
   <body class="gradient{% if settings.animations_hover_elements != 'none' %} animate--hover-{{ settings.animations_hover_elements }}{% endif %}">
@@ -362,5 +362,37 @@
     {%- if settings.predictive_search_enabled -%}
       <script src="{{ 'predictive-search.js' | asset_url }}" defer="defer"></script>
     {%- endif -%}
+    
+<script>
+document.addEventListener('DOMContentLoaded', function () {
+  // Initialize Swiper
+  const swiper = new Swiper('.mySwiper', {
+    loop: true, // Enables infinite looping
+    slidesPerView: 1, // Show only one slide
+    spaceBetween: 0, // No extra spacing between slides
+    {% comment %} grabCursor: true, // Changes cursor to a grab icon {% endcomment %}
+    navigation: {
+      nextEl: '.swiper-button-next', // Next button
+      prevEl: '.swiper-button-prev', // Previous button
+    },
+    pagination: {
+      el: '.swiper-pagination', // Add pagination (if required)
+      clickable: true, // Allow pagination clicks
+    },
+    keyboard: {
+      enabled: true, // Enable keyboard navigation
+    },
+    mousewheel: {
+       enabled: true, // Enable mousewheel navigation
+    },
+    resistanceRatio: 0.85, // Prevent overscroll bouncing
+    threshold: 10, // Minimum drag distance to trigger slide
+  });
+});
+
+
+
+</script>
+
   </body>
 </html>

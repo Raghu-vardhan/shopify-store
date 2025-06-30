@@ -70,7 +70,7 @@
   --shadow-horizontal-offset: var(--media-shadow-horizontal-offset);
   --shadow-vertical-offset: var(--media-shadow-vertical-offset);
   --shadow-blur-radius: var(--media-shadow-blur-radius);
-  --shadow-opacity: var(--media-shadow-opacity);
+  /* --shadow-opacity: var(--media-shadow-opacity); */
   --shadow-visible: var(--media-shadow-visible);
 }
 
@@ -3612,3 +3612,29 @@ width: calc(50% - 1rem / 2) !important;
   display: none;
 }
 /* Coded by websensepro.com | youtube.com/c/websensepro */
+.product__media-list {
+  display: flex; /* Swiper.js expects a flex container */
+  transition: transform 0.3s ease; /* Ensure smooth animation */
+}
+
+.product__media-item {
+  flex: 0 0 100%; /* Each slide should take up full width */
+}
+
+
+.swiper {
+  width: 100%;
+  height: auto;
+  margin: 20px auto;
+}
+
+.swiper-slide {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.swiper-pagination-bullet {
+  background: #007bff;
+}
+
