@@ -51,7 +51,7 @@
   <!-- Main Swiper Container -->
   <div class="swiper main-swiper-{{ section.id }}">
     <div class="swiper-wrapper">
-      {%- if product.selected_or_first_available_variant.featured_media != null -%}
+      {%- if product.selected_or_first_available_variant.featured_media == null -%}
         {%- assign featured_media = product.selected_or_first_available_variant.featured_media -%}
         <div class="swiper-slide">
           {% render 'product-thumbnail',

@@ -1,0 +1,46 @@
+{%- assign product = all_products[section.settings.select-product] -%}
+
+
+{%- if product -%}
+    <div class="product-main page-width">
+        <a href="{{ product.url }}">
+            <div class="product-card">
+                <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" height="300" width="300" class="product-image">
+            </div>
+
+            <div class="card-deatils">
+                <h2 class="produc-title">{{ product.title }}</h2>
+                <p>{{product.price | money }}</p>
+            </div>
+        </a>
+
+        {%- if product.available -%}
+            <form method="post" action="/cart/add">
+                <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+                <button type="submit">Add to cart</button>
+            </form>
+        {%- endif -%}
+    </div>
+{%- endif -%}
+
+
+{% schema %}
+  {
+    "name": "custom collection",
+    "class": "custom collection",
+    "settings": [
+      {
+        "type": "product",
+        "id": "select-product",
+        "label": "Select Product",
+      },
+
+    ],
+    "presets": [
+      {
+        "name": "custom collection",
+        "category": "Custom"
+      }
+    ]
+  }
+{% endschema %}

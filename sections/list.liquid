@@ -1,0 +1,115 @@
+{% assign collection = section.settings.selected_collection %}
+
+{% if collection %}
+  <div class="product-grid">
+    {% for product in collection.products %}
+      <div class="product-card">
+        <div class="product-card__media">
+          <a href="{{ product.url }}">
+            <img src="{{ product.featured_image | img_url: 'medium' }}" alt="{{ product.title }}" width="300" height="300" loading="lazy" />
+          </a>
+        </div>
+
+        <div class="product-card__details">
+          <h3 class="product-title">{{ product.title }}</h3>
+          <p class="product-price">{{ product.price | money }}</p>
+
+          {% if product.available %}
+            <form method="post" action="/cart/add">
+              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
+              <button type="submit" class="add-to-cart">Add to Cart</button>
+            </form>
+          {% else %}
+            <p class="sold-out">Sold out</p>
+          {% endif %}
+        </div>
+      </div>
+    {% endfor %}
+  </div>
+{% else %}
+  <p>No collection selected.</p>
+{% endif %}
+
+{% stylesheet %}
+.product-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  gap: 24px;
+  padding: 30px 15px;
+}
+
+.product-card {
+  background: #fff;
+  border: 1px solid #eaeaea;
+  border-radius: 10px;
+  padding: 16px;
+  text-align: center;
+  transition: box-shadow 0.3s ease, transform 0.3s ease;
+}
+
+.product-card:hover {
+  box-shadow: 0 6px 18px rgba(0, 0, 0, 0.06);
+  transform: translateY(-4px);
+}
+
+.product-card__media img {
+  max-width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.product-title {
+  font-size: 1rem;
+  color: #333;
+  margin: 12px 0 6px;
+}
+
+.product-price {
+  font-size: 1rem;
+  font-weight: 600;
+  color: #444;
+  margin-bottom: 12px;
+}
+
+.add-to-cart {
+  background-color: #1e73be;
+  color: #fff;
+  padding: 10px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: background 0.2s ease;
+}
+
+.add-to-cart:hover {
+  background-color: #155a9a;
+}
+
+.sold-out {
+  color: #c00;
+  font-weight: bold;
+  margin-top: 12px;
+}
+{% endstylesheet %}
+
+{% schema %}
+{
+  "name": "Product List",
+  "tag": "section",
+  "class": "custom app",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "selected_collection",
+      "label": "Select Collection",
+    }
+  ],
+  "presets": [
+    {
+      "name": "Product List",
+      "category": "Custom"
+    }
+  ]
+}
+{% endschema %}
