@@ -1,6 +1,6 @@
 {%- assign product = all_products[section.settings.product_select] -%}
 {%- if product -%}
-  <div class="main-product">
+  <div class="main-product page-width">
     <div class="main-swiper swiper">
         <div class="swiper wrapper">
             {% for image in product.images %}
@@ -17,7 +17,7 @@
 
     <div class="thumbnail">
         {% for image in product.images %}
-            <img src="{{ image | img_url:'size' }}" onclick= swiper.slideTo({loop.index0}) alt="image" height="100" width="100">
+            <img src="{{ image | img_url:'size' }}" onclick= "swiper.slideTo({{forloop.index0}})" alt="image" height="100" width="100">
         {% endfor %}
         
         <h2>{{ product.title }}</h2>
@@ -26,14 +26,27 @@
 {% endif %}
 
 <style>
-    .swiper-slide{
+    .main-swiper {
         width:600px;
-        height:auto;
         overflow: hidden;
+    }
+    .swiper-slide {
+        display: flex;
+        justify-content: start;
     }
 </style>
 
+<!-- Swiper JS -->
+    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
+    <!-- Swiper Initialization -->
+    <script>
+    const swiper = new Swiper(".main-swiper", {
+        loop: true,
+        slidesPerView: 1,
+        spaceBetween: 10,
+    });
+    </script>
 
 
 {% schema %}
