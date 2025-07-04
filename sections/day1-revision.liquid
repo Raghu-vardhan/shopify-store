@@ -1,0 +1,57 @@
+{%- assign product = all_products[section.settings.product_select] -%}
+{%- if product -%}
+  <div class="main-product">
+    <div class="main-swiper swiper">
+        <div class="swiper wrapper">
+            {% for image in product.images %}
+            <div class="swiper-slide">
+                <img 
+                src="{{ image | img_url: '600x600' }}" 
+                alt="{{ product.title }}" 
+                width="600" height="600" 
+                class="main-image" />
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+
+    <div class="thumbnail">
+        {% for image in product.images %}
+            <img src="{{ image | img_url:'size' }}" onclick= swiper.slideTo({loop.index0}) alt="image" height="100" width="100">
+        {% endfor %}
+        
+        <h2>{{ product.title }}</h2>
+    </div>
+  </div>
+{% endif %}
+
+<style>
+    .swiper-slide{
+        width:600px;
+        height:auto;
+        overflow: hidden;
+    }
+</style>
+
+
+
+
+{% schema %}
+    {
+        "name": "revision section",
+        "class": "revision section",
+        "settings": [
+            {
+                "type": "product",
+                "id": "product_select",
+                "label": "Select Product"
+            }
+        ],
+        "presets": [
+            {
+                "name": "Revision Section",
+                "category": "Custom"
+            }
+        ]
+    }
+{% endschema %}
