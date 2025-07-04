@@ -2,7 +2,7 @@
 {%- if product -%}
   <div class="main-product page-width">
     <div class="main-swiper swiper">
-        <div class="swiper wrapper">
+        <div class="swiper-wrapper">
             {% for image in product.images %}
             <div class="swiper-slide">
                 <img 
@@ -30,14 +30,17 @@
         width:600px;
         overflow: hidden;
     }
-    .swiper-slide {
+    `.swiper-wrapper {
         display: flex;
         justify-content: start;
+    }
+    .swiper {
+        margin: 0;
     }
 </style>
 
 <!-- Swiper JS -->
-    <script src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
+    <script defer src="https://cdn.jsdelivr.net/npm/swiper@10/swiper-bundle.min.js"></script>
 
     <!-- Swiper Initialization -->
     <script>
