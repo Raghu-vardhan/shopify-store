@@ -75,7 +75,12 @@
 }
 
 /* base */
-
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  background-color: #007bff;
+}
 .page-width {
   max-width: var(--page-width);
   margin: 0 auto;
@@ -3638,3 +3643,6 @@ width: calc(50% - 1rem / 2) !important;
   background: #007bff;
 }
 
+h1 h2 h3 h4 h5 h6 {
+  color: green;
+}
